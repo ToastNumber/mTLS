@@ -4,3 +4,8 @@
 *.pem
 *.srl
 *.class
+.idea/
+out/
+*.iml
+*.jks
+*.p12
