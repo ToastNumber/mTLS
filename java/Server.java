@@ -4,22 +4,20 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.InetAddress;
-import java.net.ServerSocket;
 import java.nio.charset.StandardCharsets;
 
 public class Server {
     public static void main(String[] args) throws IOException {
-        try (SSLServerSocket serverSocket = (SSLServerSocket) SSLServerSocketFactory.getDefault()
-                .createServerSocket(5000, 0, InetAddress.getByName("localhost"))) {
-            System.out.println(serverSocket);
+        int port = 5000;
+        InetAddress localhost = InetAddress.getByName("localhost");
+        try (SSLServerSocket serverSocket = (SSLServerSocket) SSLServerSocketFactory.getDefault().createServerSocket(port, 0, localhost)) {
             serverSocket.setNeedClientAuth(true);
+            System.out.printf("Listening on %s%n", serverSocket);
             while (true) {
                 try (var socket = serverSocket.accept()) {
-                    System.out.println("Client connected!");
-                    var reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-
+                    var in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                     String line;
-                    while ((line = reader.readLine()) != null) {
+                    while ((line = in.readLine()) != null) {
                         System.out.println(line);
                         if (line.isEmpty()) {
                             break;
@@ -32,9 +30,7 @@ public class Server {
                             
                             <h1>Hello, World!</h1>
                             """;
-                    System.out.println("Writing response ...");
                     socket.getOutputStream().write(response.getBytes(StandardCharsets.UTF_8));
-                    socket.getOutputStream().flush();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
