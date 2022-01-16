@@ -5,5 +5,3 @@ keytool -importcert \
     -keystore cacerts.jks \
     -storepass password \
     -noprompt
-
-
