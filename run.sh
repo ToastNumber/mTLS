@@ -7,6 +7,3 @@ java \
     -Djavax.net.ssl.trustStorePassword=password \
     -Djavax.net.debug=ssl,handshake \
     java/"${clientType^}".java
-
-
-

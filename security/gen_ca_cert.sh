@@ -7,7 +7,7 @@ cert=cacert.pem
 # The req command primarily creates and processes certificate requests in PKCS#10 format. It
 # can additionally create self signed certificates for use as root CAs for example
 
-# Straight from the manpage: Generate a self signed root certificate:
+# Straight from the manpage: Generate a self signed root certificate
 
 # -x509: outputs a self signed certificate instead of a certificate request
 # -newkey: creates a new certificate request and new private key
